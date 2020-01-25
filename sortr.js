@@ -7,42 +7,51 @@
 
     Sortr.prototype = {
 
-        insertion: function() {
-            
+        insertion: function(order) {
+            //debugger;
             let arr = this.arr;
-            
-            for(let i = 1; i < arr.length; i++) {
-                if(arr[i] >= arr[i - 1]) {
-                    continue;
-                } else {
-                    let k = i - 1;
-                    while(arr[i] > arr[k] && arr[i] < arr[k - 1] || k - 1 === 0) {
-                            arr.splice(i, 1);
-                            arr.splice(k, 0, arr[i]);
-                        k--;
-                    }
-                }
+            if(order === 'descend') {
 
+            } else {
+                for(let i = 1; i < arr.length; i++) {
+                    let current = arr[i];
+                    if(current >= arr[i - 1]) {
+                        continue;
+                    } else {
+                        let prev = i - 1;
+                        while(prev >= 0 && arr[prev] > current) {
+                            arr[prev + 1] = arr[prev];
+                            prev--;
+                        }
+                        arr[prev + 1] = current;
+                    }
+
+                }
             }
 
             return arr;
         },
 
-        buble: function() {
+        buble: function(order) {
 
-            arr = this.arr;
+            let arr = this.arr;
             let sorted;
-            do {
-                sorted = true;
 
-                for (let current = 0; current < arr.length; current++) {
-                    if (arr[current] > arr[current + 1]) {
-                        [arr[current], arr[current + 1]] = [arr[current + 1], arr[current]];
-                        sorted = false;
+            if(order === 'descend') {
+
+            } else {
+                do {
+                    sorted = true;
+
+                    for (let current = 0; current < arr.length; current++) {
+                        if (arr[current] > arr[current + 1]) {
+                            [arr[current], arr[current + 1]] = [arr[current + 1], arr[current]];
+                            sorted = false;
+                        }
                     }
-                }
-                
-            } while (!sorted);
+                    
+                } while (!sorted);
+            }
 
             return arr;
         }
