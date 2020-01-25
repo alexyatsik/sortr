@@ -9,46 +9,23 @@
 
         insertion: function() {
             
-            arr = this.arr;
-            const sortedArr = [];
-
-            if (arr.length < 2) {
-                return arr;
-            }
+            let arr = this.arr;
             
-            // insert the first and second element into their position
-            // because it can be done without any loops
-            sortedArr.push(arr[0]);
-            if (arr[1] > arr[0]) {
-                sortedArr.push(arr[1]);
-            } else {
-                sortedArr.unshift(arr[1]);
-            }
-            
-            //debugger;
-            for (let i = 2; i < arr.length; i++) {
-                const current = arr[i];
-
-                let counter = 0;
-                if (current <= sortedArr[0]) {
-                    sortedArr.unshift(current);
-                    continue;
-                } else if (current >= sortedArr[sortedArr.length - 1]) {
-                    sortedArr.push(current);
+            for(let i = 1; i < arr.length; i++) {
+                if(arr[i] >= arr[i - 1]) {
                     continue;
                 } else {
-                    while (true) {
-                        if (current >= sortedArr[counter] && current <= sortedArr[counter + 1]) {
-                            sortedArr.splice(counter + 1, 0, current);
-                            break;
-                        } else {
-                            counter++;
-                        }
+                    let k = i - 1;
+                    while(arr[i] > arr[k] && arr[i] < arr[k - 1] || k - 1 === 0) {
+                            arr.splice(i, 1);
+                            arr.splice(k, 0, arr[i]);
+                        k--;
                     }
                 }
+
             }
 
-            return sortedArr;
+            return arr;
         },
 
         buble: function() {
