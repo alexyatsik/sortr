@@ -44,7 +44,7 @@
             return arr;
         },
 
-        buble: function(order) {
+        bubble: function(order) {
 
             let arr = this.arr;
             let sorted;
