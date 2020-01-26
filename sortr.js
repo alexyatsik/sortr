@@ -8,7 +8,8 @@
     Sortr.prototype = {
 
         insertion: function(order) {
-            let arr = this.arr;
+
+            const arr = this.arr;
 
             if (order === 'descend') {
                 for (let i = 1; i < arr.length; i++) {
@@ -46,7 +47,7 @@
 
         bubble: function(order) {
 
-            let arr = this.arr;
+            const arr = this.arr;
             let sorted;
 
             if (order === 'descend') {
@@ -80,7 +81,7 @@
 
         selection: function(order) {
 
-            let arr = this.arr;
+            const arr = this.arr;
 
             if (order === 'descend') {
                 for (let currentIndex = 0; currentIndex < arr.length; currentIndex++) {
@@ -109,9 +110,53 @@
             }
 
             return arr;
+        },
+
+        merge: function(order) {
+
+            const arr = this.arr;
+
+            if (order === 'descend') {
+
+            } else {
+
+                return merge(arr);
+
+                function merge(arr) {
+
+                    let left = arr.slice(0, Math.ceil(arr.length / 2));
+                    let right = arr.slice(Math.ceil(arr.length / 2));
+
+                    left.sort( (a, b) => a - b );
+                    right.sort( (a, b) => a - b );
+
+                    let mergedArr = [];
+
+                    while (left.length !== 0 && right.length !== 0) {
+                        if (left[0] <= right[0]) {
+                            mergedArr.push(left.shift());
+                        } else {
+                            mergedArr.push(right.shift());
+                        }
+                    }
+
+                    if (left.length === 0) {
+                        while (right.length !== 0) {
+                            mergedArr.push(right.shift());
+                        }
+                    } else {
+                        while (left.length !== 0) {
+                            mergedArr.push(left.shift());
+                        }
+                    }
+
+                    return mergedArr;
+
+                }
+            }
         }
 
-        
+
     }
 
     Sortr.init = function(arr) {
